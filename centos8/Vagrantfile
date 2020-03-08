@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
     c.vm.network "private_network", ip: "10.240.0.10"
 
     c.vm.provision :shell, :path => "scripts/setup-hosts.sh"
-    #c.vm.provision :shell, :path => "scripts/bootstrap.sh"
+    c.vm.provision :shell, :path => "scripts/bootstrap.sh"
   end
 
   (0..1).each do |n|
@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
       c.vm.network "private_network", ip: "10.240.0.2#{n}"
 
       c.vm.provision :shell, :path => "scripts/setup-hosts.sh"
-      #c.vm.provision :shell, :path => "scripts/bootstrap.sh"
+      c.vm.provision :shell, :path => "scripts/bootstrap.sh"
     end
   end
 end

@@ -1,4 +1,9 @@
 #!/bin/sh
+# Install docker
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo dnf install -y --nobest docker-ce
+sudo systemctl enable --now docker
+
 cat << EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -13,10 +18,8 @@ EOF
 sudo setenforce 0
 sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
-# Install docker /kubeadm
-sudo yum install -y docker kubelet kubeadm kubectl --disableexcludes=kubernetes
-
-sudo systemctl enable --now docker
+# Install kubeadm
+sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 sudo systemctl enable --now kubelet
 
 # Disable swap
