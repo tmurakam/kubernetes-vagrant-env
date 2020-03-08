@@ -26,6 +26,8 @@ Install calico network plugin:
 
     $ kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 
+Note: For CentOS8, use calico.yaml in the centos8 dir, which uses nftables backend.
+
 On each workers:
 
     $ sudo kubeadm join...
