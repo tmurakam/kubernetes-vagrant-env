@@ -586,6 +586,9 @@ spec:
         - name: calico-node
           image: calico/node:v3.8.6
           env:
+            # Use nftables backend
+            - name: FELIX_IPTABLESBACKEND
+              value: NFT
             # Use Kubernetes API as the backing datastore.
             - name: DATASTORE_TYPE
               value: "kubernetes"
