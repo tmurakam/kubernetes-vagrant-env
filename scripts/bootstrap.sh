@@ -15,6 +15,8 @@ sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
 # Install docker /kubeadm
 sudo yum install -y docker kubelet kubeadm kubectl --disableexcludes=kubernetes
+
+sudo systemctl enable --now docker
 sudo systemctl enable --now kubelet
 
 # Disable swap
