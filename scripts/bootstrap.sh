@@ -13,7 +13,15 @@ EOF
 sudo setenforce 0
 sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
+# Install docker /kubeadm
 sudo yum install -y docker kubelet kubeadm kubectl --disableexcludes=kubernetes
-
 sudo systemctl enable --now kubelet
 
+# Disable swap
+sudo swapoff -a
+
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sudo sysctl --system
